@@ -5,20 +5,49 @@ const totalTime = 7500;
 const breatheTime = (totalTime / 5) * 2;
 const holdTime = totalTime / 5;
 
-breathAnimation();
+let intervalId = null;
+let breatheTimeout = null;
+let holdTimeout = null;
+let paused = false;
 
 function breathAnimation() {
   text.innerText = "Breathe In!";
   container.className = "container grow";
 
-  setTimeout(() => {
+  breatheTimeout = setTimeout(() => {
     text.innerText = "Hold";
 
-    setTimeout(() => {
+    holdTimeout = setTimeout(() => {
       text.innerText = "Breathe Out!";
       container.className = "container shrink";
     }, holdTime);
   }, breatheTime);
 }
 
-setInterval(breathAnimation, totalTime);
+function start() {
+  breathAnimation();
+  intervalId = setInterval(breathAnimation, totalTime);
+}
+
+function stop() {
+  clearInterval(intervalId);
+  clearTimeout(breatheTimeout);
+  clearTimeout(holdTimeout);
+  intervalId = null;
+}
+
+container.addEventListener("click", () => {
+  if (paused) {
+    paused = false;
+    container.classList.remove("paused");
+    start();
+  } else {
+    paused = true;
+    container.classList.add("paused");
+    container.className = "container paused";
+    text.innerText = "Paused (click to resume)";
+    stop();
+  }
+});
+
+start();

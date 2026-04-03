@@ -4,16 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="A guided breathing exercise app to help lower blood pressure and maintain mental health through controlled breathing." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌬️</text></svg>" />
     <link rel="stylesheet" href="style.css" />
     <title>Breathe</title>
   </head>
   <body>
     <h1>Breathe</h1>
 
-    <div class="container" id="container">
+    <div class="container" id="container" role="img" aria-label="Breathing circle animation">
       <div class="circle"></div>
 
-      <p id="text"></p>
+      <p id="text" aria-live="polite"></p>
 
       <div class="pointer-container">
         <span class="pointer"></span>

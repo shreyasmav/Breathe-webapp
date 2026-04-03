@@ -43,15 +43,24 @@ The animation runs on a **7.5-second cycle** defined in `script.js`:
 2. `breathAnimation()` sets CSS classes on the container to trigger grow/shrink keyframe animations
 3. Text content updates to show current phase ("Breathe In!", "Hold", "Breathe Out!")
 4. A rotating pointer (CSS `rotate` animation, 7.5s cycle) visually tracks progress around the circle
-5. `setInterval(breathAnimation, totalTime)` repeats the cycle indefinitely
+5. `start()` calls `breathAnimation()` and sets up the interval; `stop()` clears all timers
+6. Clicking the container toggles pause/resume — adds `.paused` class and stops timers
+
+### Accessibility
+
+- `aria-live="polite"` on the text element announces phase changes to screen readers
+- `role="img"` and `aria-label` on the container describe the animation
+- `<meta name="description">` provides context for search engines and assistive tools
 
 ### Styling
 
 - **Font:** Montserrat (Google Fonts import)
 - **Color scheme:** Green/teal (`#224941` background fallback, `#55b7a4`/`#336d62` gradient)
 - **Layout:** Flexbox centering, full viewport height
-- **Animations:** CSS `@keyframes` for `grow`, `shrink`, and `rotate`
+- **Responsive:** Container uses `min(300px, 70vw)` for mobile-friendly sizing; gradient circle uses `calc()` and `transform: translate(-50%, -50%)` for robust centering
+- **Animations:** CSS `@keyframes` for `grow`, `shrink`, `rotate`, and `fadeIn` (page load)
 - **Circle decoration:** Conic gradient ring around the breathing circle
+- **Interaction:** `cursor: pointer` and `user-select: none` on the container for click-to-pause
 
 ## Development Workflow
 
